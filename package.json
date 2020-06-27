@@ -1,0 +1,11 @@
+{
+  "name": "1uphealth-coding-challenge",
+  "version": "1.0.0",
+  "description": "Solution for 1upHealth API coding evaluation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ben Mesirow",
+  "license": "ISC"
+}
