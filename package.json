@@ -3,14 +3,16 @@
     "version": "1.0.0",
     "private": true,
     "description": "Solution for 1upHealth API coding evaluation",
+    "main": "src/server.js",
     "scripts": {
-        "start:watch": "nodemon",
+        "start:watch": "nodemon src/server.js",
         "build": "next build",
-        "start": "npm run build && node src/server.js"
+        "start": "node src/server.js"
     },
     "author": "Ben Mesirow",
     "dependencies": {
         "@material-ui/core": "^4.10.2",
+        "axios": "^0.19.2",
         "express": "4.17.1",
         "next": "9.4.4",
         "react": "16.13.1",
