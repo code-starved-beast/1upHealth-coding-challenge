@@ -1,11 +1,23 @@
 {
-  "name": "1uphealth-coding-challenge",
-  "version": "1.0.0",
-  "description": "Solution for 1upHealth API coding evaluation",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Ben Mesirow",
-  "license": "ISC"
+    "name": "1uphealth-coding-challenge",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Solution for 1upHealth API coding evaluation",
+    "scripts": {
+        "start:watch": "nodemon",
+        "build": "next build",
+        "start": "npm run build && node src/server.js"
+    },
+    "author": "Ben Mesirow",
+    "dependencies": {
+        "@material-ui/core": "^4.10.2",
+        "express": "4.17.1",
+        "next": "9.4.4",
+        "react": "16.13.1",
+        "react-dom": "16.13.1"
+    },
+    "devDependencies": {
+        "nodemon": "2.0.4"
+    },
+    "license": "ISC"
 }

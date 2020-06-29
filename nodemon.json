@@ -1,0 +1,14 @@
+{
+    "restartable": "rs",
+    "verbose": true,
+    "execMap": {
+        "js": "node"
+    },
+    "events": {
+        "restart": "npm run build"
+    },
+    "watch": [
+        "src/"
+    ],
+    "ext": "js,jsx"
+}
