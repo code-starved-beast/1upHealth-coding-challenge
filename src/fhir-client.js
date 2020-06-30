@@ -1,9 +1,9 @@
-const axios = require('axios');
+import { create } from 'axios';
 
 class FHIRClient {
     constructor({ userId, clientId, clientSecret }) {
         Object.assign(this, { userId, clientId, clientSecret });
-        this.axios = axios.create({ baseURL: 'https://api.1up.health' });
+        this.axios = create({ baseURL: 'https://api.1up.health' });
         this.axios.interceptors.request.use(config => {
             if (config.url.match('/fhir/dstu2/Patient')) {
                 return { ...config, headers: this.authHeaders };
@@ -71,4 +71,4 @@ class FHIRClient {
     }
 }
 
-module.exports = FHIRClient;
+export default FHIRClient;

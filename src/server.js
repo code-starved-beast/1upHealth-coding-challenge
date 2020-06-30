@@ -1,7 +1,7 @@
-const next = require('next');
-const express = require('express');
-const { asyncMiddlewareWrapper } = require('./util');
-const FHIRClient = require('./fhir-client');
+import next from 'next';
+import express from 'express';
+import { asyncMiddlewareWrapper } from './util';
+import FHIRClient from './fhir-client';
 
 const app = next({ dev: process.env.NODE_ENV === 'development' });
 const requestHandler = app.getRequestHandler();
