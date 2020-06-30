@@ -37,5 +37,5 @@ export default function PatientView({ resources, patient }) {
 				<Link href="/patients"><a>View All Patients</a></Link>
 			</Card.Footer>
 		</Card>
-	)
+	);
 }

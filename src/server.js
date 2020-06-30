@@ -27,14 +27,14 @@ app.prepare().then(async () => {
 
 	server.get('/', (req, res) => {
 		res.redirect('/patients');
-	})
+	});
 
 	server.all('*', requestHandler);
 
 	server.use((err, req, res, next) => {
 		logger.error(err);
 		res.sendStatus(500);
-	})
+	});
 
 	await server.fhirClient.authenticate();
 	server.listen(process.env.SERVER_PORT, () => logger.info(`listening on port ${process.env.SERVER_PORT}`));

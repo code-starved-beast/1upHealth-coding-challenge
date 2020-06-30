@@ -11,5 +11,5 @@ export default function ResourceGroup({ content, title }) {
 				<Subgroup content={content} />
 			</Card.Body>
 		</Card>
-	)
+	);
 }

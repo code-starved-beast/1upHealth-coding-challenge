@@ -5,9 +5,10 @@
 	"description": "Solution for 1upHealth API coding evaluation",
 	"main": "src/server.js",
 	"scripts": {
-		"start:dev": "nodemon --watch src/ --ignore src/pages/ --exec npm run start",
+		"babel-node": "babel-node --presets=@babel/preset-env -- src/server.js",
+		"start:dev": "npm run build && nodemon --watch src/ --ignore src/pages/ --exec npm run babel-node",
 		"build": "next build",
-		"start": "babel-node --presets=@babel/preset-env -- src/server.js"
+		"start": "npm run build && npm run babel-node"
 	},
 	"author": "Ben Mesirow",
 	"dependencies": {
@@ -28,6 +29,5 @@
 		"@babel/node": "^7.10.3",
 		"eslint-config-airbnb-standard": "^3.1.0",
 		"nodemon": "2.0.4"
-	},
-	"license": "ISC"
+	}
 }
