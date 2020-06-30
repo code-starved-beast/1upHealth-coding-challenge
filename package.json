@@ -1,27 +1,33 @@
 {
-    "name": "1uphealth-coding-challenge",
-    "version": "1.0.0",
-    "private": true,
-    "description": "Solution for 1upHealth API coding evaluation",
-    "main": "src/server.js",
-    "scripts": {
-        "start:watch": "nodemon --exec babel-node --presets=@babel/preset-env -- src/server.js",
-        "build": "next build",
-        "start": "babel-node --presets=@babel/preset-env -- src/server.js"
-    },
-    "author": "Ben Mesirow",
-    "dependencies": {
-        "@material-ui/core": "^4.10.2",
-        "axios": "^0.19.2",
-        "express": "4.17.1",
-        "next": "9.4.4",
-        "react": "16.13.1",
-        "react-dom": "16.13.1"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.10.3",
-        "@babel/node": "^7.10.3",
-        "nodemon": "2.0.4"
-    },
-    "license": "ISC"
+	"name": "1uphealth-coding-challenge",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Solution for 1upHealth API coding evaluation",
+	"main": "src/server.js",
+	"scripts": {
+		"start:dev": "nodemon --watch src/ --ignore src/pages/ --exec npm run start",
+		"build": "next build",
+		"start": "babel-node --presets=@babel/preset-env -- src/server.js"
+	},
+	"author": "Ben Mesirow",
+	"dependencies": {
+		"@zeit/next-css": "^1.0.1",
+		"axios": "^0.19.2",
+		"bootstrap-css-only": "^4.4.1",
+		"dotenv": "^8.2.0",
+		"express": "4.17.1",
+		"lodash": "^4.17.15",
+		"next": "9.4.4",
+		"react": "16.13.1",
+		"react-bootstrap": "^1.0.1",
+		"react-dom": "16.13.1",
+		"winston": "^3.3.3"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.10.3",
+		"@babel/node": "^7.10.3",
+		"eslint-config-airbnb-standard": "^3.1.0",
+		"nodemon": "2.0.4"
+	},
+	"license": "ISC"
 }
