@@ -1,24 +1,7 @@
 import { ButtonGroup, Card } from 'react-bootstrap';
 import { Resource } from '../../components';
 
-export async function getServerSideProps({ req: { app: { fhirClient }, params, query } }) {
-	const skip = query.page && (parseInt(query.page) - 1) * 10;
-	const [patient, everything] = await Promise.all([
-		fhirClient.getPatient(params.id),
-		fhirClient.getEverythingForPatient(params.id, skip)
-	]);
-	const { entry, total } = everything;
-
-	return {
-		props: {
-			resources: entry.map(({ resource }) => resource),
-			patient,
-			currentPage: query.page ? parseInt(query.page) : 1,
-			lastPage: Math.floor(total / 10) + 1,
-			patientId: params.id
-		}
-	};
-}
+export { getServerSideProps } from '../../view-helpers';
 
 export default function PatientView({ resources, patient, currentPage, lastPage, patientId }) {
 	return (

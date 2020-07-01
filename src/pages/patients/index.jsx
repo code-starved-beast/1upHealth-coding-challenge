@@ -1,17 +1,7 @@
 import React from 'react';
 import { Card, ListGroup } from 'react-bootstrap'
 
-export async function getServerSideProps(context) {
-	const { entry } = await context.req.app.fhirClient.listAllPatients();
-
-	const patients = entry
-		.map(({ resource }) => resource)
-		.filter(({ resourceType }) => resourceType === 'Patient');
-
-	return {
-		props: { patients }
-	};
-}
+export { getServerSideProps } from '../../view-helpers';
 
 export default function Index({ patients }) {
 	return (
