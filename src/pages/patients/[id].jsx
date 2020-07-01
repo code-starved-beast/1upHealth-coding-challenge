@@ -1,5 +1,5 @@
 import { ButtonGroup, Card } from 'react-bootstrap';
-import { ResourceGroup } from '../../components';
+import { Resource } from '../../components';
 
 export async function getServerSideProps({ req: { app: { fhirClient }, params, query } }) {
 	const skip = query.page && (parseInt(query.page) - 1) * 10;
@@ -34,7 +34,7 @@ export default function PatientView({ resources, patient, currentPage, lastPage,
 			</Card.Header>
 			<Card.Body>
 				{resources.map(resource => (
-					<ResourceGroup
+					<Resource
 						key={resource.identifier[0].value}
 						content={resource}
 						title={resource.resourceType.replace(/(?=[A-Z])/g, ' ')}
