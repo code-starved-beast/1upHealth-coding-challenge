@@ -1,28 +1,37 @@
-import { Card } from 'react-bootstrap';
+import { ButtonGroup, Card } from 'react-bootstrap';
 import Link from 'next/link';
 import { ResourceGroup } from '../../components';
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({ req: { app: { fhirClient }, params, query } }) {
+	const skip = query.page && (parseInt(query.page) - 1) * 10;
 	const [patient, everything] = await Promise.all([
-		context.req.app.fhirClient.getPatient(context.req.params.id),
-		context.req.app.fhirClient.getEverythingForPatient(context.req.params.id)
+		fhirClient.getPatient(params.id),
+		fhirClient.getEverythingForPatient(params.id, skip)
 	]);
-
-	const resources = everything.entry.map(({ resource }) => resource)
+	const { entry, total } = everything;
 
 	return {
 		props: {
-			resources,
-			patient
+			resources: entry.map(({ resource }) => resource),
+			patient,
+			currentPage: query.page ? parseInt(query.page) : 1,
+			lastPage: Math.floor(total / 10) + 1,
+			patientId: params.id
 		}
 	};
 }
 
-export default function PatientView({ resources, patient }) {
+export default function PatientView({ resources, patient, currentPage, lastPage, patientId }) {
 	return (
 		<Card>
 			<Card.Header>
 				<Card.Title>{patient.name[0].text}</Card.Title>
+				<Card.Text>
+					<Link href="/patients"><a>View All Patients</a></Link>
+				</Card.Text>
+				<Card.Text>
+					<a href="#footer">Jump to bottom</a>
+				</Card.Text>
 			</Card.Header>
 			<Card.Body>
 				{resources.map(resource => (
@@ -33,8 +42,25 @@ export default function PatientView({ resources, patient }) {
 					/>
 				))}
 			</Card.Body>
-			<Card.Footer>
-				<Link href="/patients"><a>View All Patients</a></Link>
+			<Card.Footer id="footer">
+				<ButtonGroup>
+					{currentPage > 1 &&
+						<Link
+							href={`/patients/${patientId}?page=${currentPage - 1}`}
+							passHref
+						>
+							<a className="btn btn-primary">&lt;&nbsp;Previous Page</a>
+						</Link>
+					}
+					{currentPage < lastPage &&
+						<Link
+							href={`/patients/${patientId}?page=${currentPage + 1}`}
+							passHref
+						>
+							<a className="btn btn-primary">Next Page&nbsp;&gt;</a>
+						</Link>
+					}
+				</ButtonGroup>
 			</Card.Footer>
 		</Card>
 	);

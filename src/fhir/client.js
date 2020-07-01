@@ -1,5 +1,4 @@
 import { create } from 'axios';
-import logger from '../config/winston';
 
 export default class FHIRClient {
 	constructor({ userId, clientId, clientSecret }) {
@@ -68,13 +67,21 @@ export default class FHIRClient {
 		return data;
 	}
 
-	async getEverythingForPatient(patientId) {
-		const { data } = await this.axios.get(`/fhir/dstu2/Patient/${patientId}/$everything`);
+	async getEverythingForPatient(patientId, skip) {
+		const { data } = await this.axios.get(`/fhir/dstu2/Patient/${patientId}/$everything`, skip && {
+			params: {
+				_skip: skip
+			}
+		});
 		return data;
 	}
 
-	async listAllPatients() {
-		const { data } = await this.axios.get('/fhir/dstu2/Patient');
+	async listAllPatients(skip) {
+		const { data } = await this.axios.get('/fhir/dstu2/Patient', skip && {
+			params: {
+				_skip: skip
+			}
+		});
 		return data;
 	}
 
