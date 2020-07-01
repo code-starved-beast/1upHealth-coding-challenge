@@ -14,31 +14,33 @@ process.on('unhandledRejection', (reason, promise) => {
 });
 
 app.prepare().then(async () => {
-	const server = express();
+	try {
+		const server = express();
 
-	server.next = app;
-	server.fhirClient = new FHIRClient({
-		userId: process.env.APP_USER_ID,
-		clientId: process.env.CLIENT_ID,
-		clientSecret: process.env.CLIENT_SECRET
-	});
+		server.next = app;
+		server.fhirClient = new FHIRClient({
+			userId: process.env.APP_USER_ID,
+			clientId: process.env.CLIENT_ID,
+			clientSecret: process.env.CLIENT_SECRET
+		});
 
-	server.use('/patients', patientRouter);
+		server.use('/patients', patientRouter);
 
-	server.get('/', (req, res) => {
-		res.redirect('/patients');
-	});
+		server.get('/', (req, res) => {
+			res.redirect('/patients');
+		});
 
-	server.all('*', requestHandler);
+		server.all('*', requestHandler);
 
-	server.use((err, req, res, next) => {
-		logger.error(err);
-		res.sendStatus(500);
-	});
+		server.use((err, req, res, next) => {
+			logger.error(err);
+			res.sendStatus(500);
+		});
 
-	await server.fhirClient.authenticate();
-	server.listen(process.env.SERVER_PORT, () => logger.info(`listening on port ${process.env.SERVER_PORT}`));
-}).catch(err => {
-	logger.error('Failed to start server');
-	logger.error(err);
+		await server.fhirClient.authenticate();
+		server.listen(process.env.SERVER_PORT, () => logger.info(`listening on port ${process.env.SERVER_PORT}`));
+	} catch (err) {
+		logger.error('Failed to start server');
+		logger.error(err)
+	}
 });
