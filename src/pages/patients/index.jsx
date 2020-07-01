@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, ListGroup } from 'react-bootstrap'
-import Link from 'next/link';
 
 export async function getServerSideProps(context) {
 	const { entry } = await context.req.app.fhirClient.listAllPatients();
@@ -24,7 +23,7 @@ export default function Index({ patients }) {
 				<ListGroup>
 					{patients.map(patient => (
 						<ListGroup.Item key={patient.id}>
-							<Link href={`/patients/${patient.id}`}><a>{patient.name.map(({ text }) => text).join('/')}</a></Link>
+							<a href={`/patients/${patient.id}`}>{patient.name.map(({ text }) => text).join('/')}</a>
 						</ListGroup.Item>
 					))}
 				</ListGroup>

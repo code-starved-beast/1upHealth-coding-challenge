@@ -1,5 +1,4 @@
 import { ButtonGroup, Card } from 'react-bootstrap';
-import Link from 'next/link';
 import { ResourceGroup } from '../../components';
 
 export async function getServerSideProps({ req: { app: { fhirClient }, params, query } }) {
@@ -27,7 +26,7 @@ export default function PatientView({ resources, patient, currentPage, lastPage,
 			<Card.Header id="header">
 				<Card.Title>{patient.name[0].text}</Card.Title>
 				<Card.Text>
-					<Link href="/patients"><a>View All Patients</a></Link>
+					<a href="/patients">View All Patients</a>
 				</Card.Text>
 				<Card.Text>
 					<a href="#footer">Jump to bottom</a>
@@ -48,20 +47,17 @@ export default function PatientView({ resources, patient, currentPage, lastPage,
 				</Card.Text>
 				<ButtonGroup>
 					{currentPage > 1 &&
-						<Link
+						<a
 							href={`/patients/${patientId}?page=${currentPage - 1}`}
-							passHref
-						>
-							<a className="btn btn-primary">&lt;&nbsp;Previous Page</a>
-						</Link>
+							className="btn btn-primary"
+						>&lt;&nbsp;Previous Page</a>
 					}
 					{currentPage < lastPage &&
-						<Link
+						<a
+							className="btn btn-primary"
+
 							href={`/patients/${patientId}?page=${currentPage + 1}`}
-							passHref
-						>
-							<a className="btn btn-primary">Next Page&nbsp;&gt;</a>
-						</Link>
+						>Next Page&nbsp;&gt;</a>
 					}
 				</ButtonGroup>
 			</Card.Footer>
