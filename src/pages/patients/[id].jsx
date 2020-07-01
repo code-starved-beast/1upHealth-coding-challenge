@@ -24,7 +24,7 @@ export async function getServerSideProps({ req: { app: { fhirClient }, params, q
 export default function PatientView({ resources, patient, currentPage, lastPage, patientId }) {
 	return (
 		<Card>
-			<Card.Header>
+			<Card.Header id="header">
 				<Card.Title>{patient.name[0].text}</Card.Title>
 				<Card.Text>
 					<Link href="/patients"><a>View All Patients</a></Link>
@@ -43,6 +43,9 @@ export default function PatientView({ resources, patient, currentPage, lastPage,
 				))}
 			</Card.Body>
 			<Card.Footer id="footer">
+				<Card.Text>
+					<a href="#header">Back to Top</a>
+				</Card.Text>
 				<ButtonGroup>
 					{currentPage > 1 &&
 						<Link
